@@ -63,12 +63,14 @@ int main(int argc, char *argv[])
 
     char payload[3] = "";
     char ack[512] = "";
-    while(!file.eof())
+    count = 0;
+    while(count < 3)
     {
         file.read(payload, sizeof(payload));
         if (sendto(main_socket, payload, 4, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;
         recvfrom(main_socket, ack, 512, 0, (struct sockaddr *)&server, &slen);
         cout << ack << endl;
+        count++;
     }
     //payload = EOF;
     //if (sendto(main_socket, payload, 4, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;
@@ -76,7 +78,7 @@ int main(int argc, char *argv[])
     
     
 
-    cout << ack << endl;
+    //cout << ack << endl;
     close(main_socket);
 
     return 0;
