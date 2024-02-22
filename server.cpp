@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
     {
         if (recvfrom(main_socket, file_chunk, 32, 0, (struct sockaddr *)&client, &clen)==-1);
         upload << file_chunk;
-        cout << file_chunk << endl;
+        cout << file_chunk;
     }
     upload.close();
     close(main_socket);
