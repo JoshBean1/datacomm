@@ -70,17 +70,19 @@ int main(int argc, char *argv[])
     char packets[10000][5];
 
     int count = 0;
-    while(!file.eof())
+    while(true)
     {
         file.read(payload, sizeof(payload)-1);
         strcpy(packets[count], payload);
-        //if (file.eof()) break;
-        cout << packets[count] << endl;
+        if (file.eof()) break;
+        //cout << packets[count] << endl;
         count++;
     }
     
     // convert number of packets to c string to send to server
-    int packet_count = count-1;
+    int packet_count = count;
+    cout << "Last:" << packet[count] << endl;
+    cout << "second to last:" << packet[count] << endl;
     string packet_count_str = to_string(packet_count);
     const char * send_packet_count = packet_count_str.c_str();
     cout << "packet count:" << packet_count << endl;
