@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
     int packet_count = sizeof(packets) / sizeof(packets[0]);
     string packet_count_str = to_string(packet_count);
     const char * send_packet_count = packet_count_str.c_str();
-    //cout << "packet count:" << packet_count << endl;
+    cout << "packet count:" << packet_count << endl;
 
     if (sendto(main_socket, send_packet_count, 32, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for packet count." << endl;
     recvfrom(main_socket, ack, 512, 0, (struct sockaddr *)&server, &slen);  // ack received number
