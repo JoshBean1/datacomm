@@ -42,6 +42,7 @@ int main(int argc, char* argv[])
     server.sin_addr.s_addr = htonl(INADDR_ANY);
     if (bind(handshake_socket, (struct sockaddr *)&server, sizeof(server)) == -1) cout << "Error in binding for handshake." << endl;
 
+    srand(time(NULL));
     int r_port = rand() % 64512 + 1024;
     string port = to_string(r_port);
     const char * port_payload = port.c_str();
