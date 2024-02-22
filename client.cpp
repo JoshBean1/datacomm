@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
     // convert number of packets to c string to send to server
     int packet_count = count;
     cout << "Last:" << packets[count] << endl;
-    cout << "second to last:" << packets[count] << endl;
+    cout << "second to last:" << packets[count-1] << endl;
     string packet_count_str = to_string(packet_count);
     const char * send_packet_count = packet_count_str.c_str();
     cout << "packet count:" << packet_count << endl;
