@@ -36,7 +36,8 @@ int main(int argc, char *argv[])
     struct sockaddr_in server;
     int handshake_socket = 0;
     socklen_t slen = sizeof(server);
-
+    
+    // create first socket
     if ((handshake_socket=socket(AF_INET, SOCK_DGRAM, 0))==-1) cout << "Error creating handshake socket." << endl;
 
     memset((char *) &server, 0, sizeof(server));
@@ -44,29 +45,35 @@ int main(int argc, char *argv[])
     server.sin_port = htons(port);
     bcopy((char *)s->h_addr, (char *)&server.sin_addr.s_addr, s->h_length);
 
-    char handshake[32] = "1248";  // test this
+    // send handshake data
+    char handshake[32] = "1248";
     if (sendto(handshake_socket, handshake, 32, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error sending handshake." << endl;  // test buffer
 
+    // receive random port into same handshake variable
     recvfrom(handshake_socket, handshake, 32, 0, (struct sockaddr *)&server, &slen);
 
+    // convert port number to int
     int r_port = atoi(handshake);
-    sleep(1);
+    
     close(handshake_socket);
+    sleep(1);  // delay to give server time to establish second socket
 
+    // creat second socket
     int main_socket = 0;
     if ((main_socket=socket(AF_INET, SOCK_DGRAM, 0))==-1) cout << "Error creating new socket." << endl;
-    
+    // specify port as random port received from server
     server.sin_port = htons(r_port);
-    bcopy((char *)s->h_addr, (char *)&server.sin_addr.s_addr, s->h_length);  // test this
+    bcopy((char *)s->h_addr, (char *)&server.sin_addr.s_addr, s->h_length);
 
+    // open file specified
     ifstream file;
     file.open(filename);
 
-    char ack[512] = "";
+    char ack[512] = "";  // variable for receiving acknowledgement from server
 
-    char packets[10000][5];
+    char packets[10000][5];  // file stored here
 
-    int count = 0;
+    int count = 0;  // count packets needed
     
     while(true)
     {
@@ -76,21 +83,23 @@ int main(int argc, char *argv[])
     }
     
     // convert number of packets to c string to send to server
+    // server knows how many to expect based on this number
     int packet_count = count;
     string packet_count_str = to_string(packet_count);
     const char * send_packet_count = packet_count_str.c_str();
 
     if (sendto(main_socket, send_packet_count, 32, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for packet count." << endl;
-    recvfrom(main_socket, ack, 512, 0, (struct sockaddr *)&server, &slen);  // ack received number
+    recvfrom(main_socket, ack, 32, 0, (struct sockaddr *)&server, &slen);  // server sends number back when received
 
+    // loop through data in 4 character segments
     for (int i = 0; i <= count; ++i)
     {
-        if (sendto(main_socket, packets[i], 32, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;
-        recvfrom(main_socket, ack, 512, 0, (struct sockaddr *)&server, &slen);
-        cout << ack << endl;
+        if (sendto(main_socket, packets[i], 4, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;
+        recvfrom(main_socket, ack, 4, 0, (struct sockaddr *)&server, &slen);
+        cout << ack << endl;  // print out response
     }
     
     close(main_socket);
-
+    file.close();
     return 0;
 }
