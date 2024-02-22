@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
     while(true)
     {
         file.read(payload, sizeof(payload)-1);
-        strcpy(packets[count], payload);
+        strncpy(packets[count], payload, sizeof(packets[count])-1);
         if (file.eof()) break;
         //cout << packets[count] << endl;
         count++;
