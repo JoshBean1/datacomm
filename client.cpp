@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
     if (sendto(main_socket, send_packet_count, 32, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for packet count." << endl;
     recvfrom(main_socket, ack, 512, 0, (struct sockaddr *)&server, &slen);  // ack received number
 
-    for (int i = 0; i <= count; ++i)
+    for (int i = 0; i < count; ++i)
     {
         cout << "payload:" << packets[i] << endl;
         if (sendto(main_socket, packets[i], 32, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;
