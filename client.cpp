@@ -72,10 +72,9 @@ int main(int argc, char *argv[])
     int count = 0;
     while(true)
     {
-        file.read(payload, sizeof(payload)-1);
+        file.read(packets[count], sizeof(payload)-1);
         if (file.eof()) break;
-        cout << payload << endl;
-        packets[count] = payload;
+        cout << packets[count] << endl;
         count++;
     }
     // convert number of packets to c string to send to server
