@@ -64,7 +64,7 @@ int main(int argc, char* argv[])
     
     while (!upload.eof())
     {
-        if (recvfrom(main_socket, file_chunk, 4, 0, (struct sockaddr *)&client, &clen)==-1) cout << "Failed to receive." << endl;
+        if (recvfrom(main_socket, file_chunk, 32, 0, (struct sockaddr *)&client, &clen)==-1) cout << "Failed to receive file." << endl;
         upload << file_chunk;
     }
     upload.close();
