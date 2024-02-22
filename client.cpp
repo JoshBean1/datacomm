@@ -72,7 +72,8 @@ int main(int argc, char *argv[])
     int count = 0;
     while(true)
     {
-        file.read(packets[count], sizeof(payload)-1);
+        file.read(payload, sizeof(payload)-1);
+        strcpy(packets[count], payload);
         if (file.eof()) break;
         cout << packets[count] << endl;
         count++;
