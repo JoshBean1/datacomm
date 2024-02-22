@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
         file.read(payload, sizeof(payload)-1);
         if (file.eof()) break;
         cout << payload << endl;
-        packets.push_back(*payload);
+        packets.push_back(payload);
     }
     cout << "TEST: " << packets.at(1) << endl;
     // convert number of packets to c string to send to server
