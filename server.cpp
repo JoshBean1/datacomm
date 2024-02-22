@@ -26,6 +26,10 @@ int main(int argc, char* argv[])
     } 
 
     int n_port = atoi(argv[1]);
+    srand(time(NULL));
+    int r_port = rand() % 64512 + 1024;
+    string port = to_string(r_port);
+    const char * port_payload = port.c_str();
 
     struct sockaddr_in server;
     struct sockaddr_in client;
@@ -40,12 +44,6 @@ int main(int argc, char* argv[])
     server.sin_port = htons(n_port);
     server.sin_addr.s_addr = htonl(INADDR_ANY);
     if (bind(handshake_socket, (struct sockaddr *)&server, sizeof(server)) == -1) cout << "Error in binding for handshake." << endl;
-
-    srand(time(NULL));
-    int r_port = rand() % 64512 + 1024;
-    string port = to_string(r_port);
-    const char * port_payload = port.c_str();
-    
     
     if (recvfrom(handshake_socket, payload, 32, 0, (struct sockaddr *)&client, &clen)==-1) cout << "Failed to receive handshake." << endl;
 
