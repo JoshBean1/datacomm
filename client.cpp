@@ -73,8 +73,8 @@ int main(int argc, char *argv[])
         cout << "ack:" << ack << endl;
     }
 
-    char payload[] = "DONE"
-    if (sendto(main_socket, payload, 32, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;
+    char payload_end[] = "DONE"
+    if (sendto(main_socket, payload_end, 32, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;
     //payload = EOF;
     //if (sendto(main_socket, payload, 4, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;
 
