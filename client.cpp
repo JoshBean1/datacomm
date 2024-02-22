@@ -61,12 +61,12 @@ int main(int argc, char *argv[])
     ifstream file;
     file.open(filename);
 
-    char payload[3] = "";
+    char payload[4] = "";
     char ack[512] = "";
     int count = 0;
     while(count < 3)
     {
-        file.read(payload, sizeof(payload));
+        file.read(payload, 4);
         cout << "payload: " << payload << endl;
         if (sendto(main_socket, payload, 32, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;
         recvfrom(main_socket, ack, 512, 0, (struct sockaddr *)&server, &slen);
