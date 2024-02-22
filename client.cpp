@@ -72,13 +72,10 @@ int main(int argc, char *argv[])
     int count = 0;
     while(true)
     {
-        file.read(payload, sizeof(payload)-1);
-        strncpy(packets[count], payload, sizeof(packets[count])-1);
-        std::streamsize bytes_read = file.gcount(); // Get the number of bytes read
-        if (bytes_read <= 0) break; // Break if no bytes were read
-        payload[bytes_read] = '\0';
+        file.read(packets[count], sizeof(payload)-1);
+        //strncpy(, payload, sizeof(packets[count])-1);
+        if (file.eof()) break;
         count++;
-        packets[count][sizeof(packets[count])-1] = '\0';
     }
     
     // convert number of packets to c string to send to server
