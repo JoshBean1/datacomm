@@ -42,13 +42,13 @@ int main(int argc, char* argv[])
     server.sin_addr.s_addr = htonl(INADDR_ANY);
     if (bind(handshake_socket, (struct sockaddr *)&server, sizeof(server)) == -1) cout << "Error in binding for handshake." << endl;
 
-    
-    if (recvfrom(handshake_socket, payload, 32, 0, (struct sockaddr *)&client, &clen)==-1) cout << "Failed to receive." << endl; 
-    //cout << "Received data: " << payload << endl;
-
     int r_port = rand() % 64512 + 1024;
     string port = to_string(r_port);
     const char * port_payload = port.c_str();
+    
+    if (recvfrom(handshake_socket, payload, 32, 0, (struct sockaddr *)&client, &clen)==-1) cout << "Failed to receive handshake." << endl; 
+    //cout << "Received data: " << payload << endl;
+
 
     if (sendto(handshake_socket, port_payload, 64, 0, (struct sockaddr *)&client, clen)==-1) cout << "Error in sendto function." << endl;
   
