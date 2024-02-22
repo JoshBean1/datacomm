@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
     char payload[5] = "";
     char ack[512] = "";
 
-    char* packets[10000][5];
+    char packets[10000][5];
 
     int count = 0;
     while(true)
