@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
     char payload[5] = "";
     char ack[512] = "";
 
-    vector<char[5]> packets;
+    vector<array<char, 5>> packets;
     while(true)
     {
         file.read(payload, sizeof(payload)-1);
