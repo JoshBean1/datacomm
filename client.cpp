@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
     if (sendto(handshake_socket, handshake, 32, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error sending handshake." << endl;  // test buffer
 
     // receive random port into same handshake variable
-    recvfrom(handshake_socket, handshake, 32, 0, (struct sockaddr *)&server, &slen);
+    recvfrom(handshake_socket, handshake, 64, 0, (struct sockaddr *)&server, &slen);
 
     // convert port number to int
     int r_port = atoi(handshake);
