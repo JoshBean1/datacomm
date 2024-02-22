@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
     while (true)
     {
         if (recvfrom(main_socket, file_chunk, 512, 0, (struct sockaddr *)&client, &clen)==-1) cout << "fail to receive from client" << endl;
-        if (strcmp(file_chunk, "DONE") != 0) break;
+        if (strcmp(file_chunk, "DONE") 0= 0) break;
         upload << file_chunk;
         cout << "received:" << file_chunk << endl;
 
