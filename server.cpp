@@ -73,7 +73,7 @@ int main(int argc, char* argv[])
     packets = atoi(packet_count);
     if (sendto(main_socket, packet_count, 512, 0, (struct sockaddr *)&client, clen)==-1) cout << "Error in sendto function for packet count ack." << endl;
 
-    for (int i = 0; i < packets; i++)
+    for (int i = 0; i < packets-1; i++)
     {
         if (recvfrom(main_socket, file_chunk, 512, 0, (struct sockaddr *)&client, &clen)==-1) cout << "fail to receive from client" << endl;
         
