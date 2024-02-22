@@ -70,6 +70,7 @@ int main(int argc, char *argv[])
     {
         file.read(payload, sizeof(payload)-1);
         if (file.eof()) break;
+        cout << payload << endl;
         packets.push_back(payload);
     }
 
