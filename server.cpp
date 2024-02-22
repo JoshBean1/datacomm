@@ -16,7 +16,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    if (arc != 1)
+    if (argc != 1)
     {
         cout << "Usage: ./server <port>" << endl;
         exit(-1);
@@ -45,9 +45,9 @@ int main(int argc, char* argv[])
 
     int r_port = rand() % 64512 + 1024;
 
-    // payload = itoa(r_port)
+    payload = itoa(r_port)
 
-    if (sendto(handshake_socket, r_port, 64, 0, (struct sockaddr *)&client, clen)==-1) cout << "Error in sendto function."; << endl;  // r_port -> payload?
+    if (sendto(handshake_socket, payload, 64, 0, (struct sockaddr *)&client, clen)==-1) cout << "Error in sendto function."; << endl;
   
     close(handshake_socket);
 
@@ -57,11 +57,12 @@ int main(int argc, char* argv[])
     if (bind(main_socket, (struct sockaddr *)&server, sizeof(server)) == -1) cout << "Error in binding for handshake." << endl;
 
     ofstream upload("upload.txt");
-    payload = "";
-    while (payload != EOF)
+    char file_chunk[] = "";
+    
+    while (file_chunk != EOF)
     {
-        if (recvfrom(main_socket, payload, 4, 0, (struct sockaddr *)&client, &clen)==-1) cout << "Failed to receive." << endl;
-        upload << payload;
+        if (recvfrom(main_socket, file_chunk, 4, 0, (struct sockaddr *)&client, &clen)==-1) cout << "Failed to receive." << endl;
+        upload << file_chunk;
     }
     upload.close();
     close(main_socket);
