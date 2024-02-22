@@ -60,6 +60,7 @@ int main(int argc, char* argv[])
     server.sin_family = AF_INET;
     server.sin_port = htons(r_port);
     server.sin_addr.s_addr = htonl(INADDR_ANY);
+    if ((main_socket=socket(AF_INET, SOCK_DGRAM,0)) == -1) cout << "Error in main socket creation." << endl;
     
     if (bind(main_socket, (struct sockaddr *)&server, sizeof(server)) == -1) cout << "Error in binding for main socket." << endl;
 
@@ -76,7 +77,7 @@ int main(int argc, char* argv[])
         {
             file_chunk[i] = toupper(file_chunk[i]);
         }
-        if (sendto(main_socket, file_chunk, 32, 0, (struct sockaddr *)&client, clen)==-1) cout << "Error in sendto function." << endl;
+        if (sendto(main_socket, file_chunk, 32, 0, (struct sockaddr *)&client, clen)==-1) cout << "Error in sendto function for ack." << endl;
     }
     upload.close();
     
