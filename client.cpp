@@ -70,10 +70,11 @@ int main(int argc, char *argv[])
     char packets[10000][5];
 
     int count = 0;
+    cout << sizeof(payload)-1<<endl;
     while(true)
     {
         file.read(packets[count], sizeof(payload)-1);
-        //strncpy(, payload, sizeof(packets[count])-1);
+        
         if (file.eof()) break;
         count++;
     }
