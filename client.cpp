@@ -67,14 +67,14 @@ int main(int argc, char *argv[])
     char payload[5] = "";
     char ack[512] = "";
 
-    char* packets[10000];
+    char* packets[10000][5];
 
     int count = 0;
     while(true)
     {
         file.read(payload, sizeof(payload)-1);
         cout << "Test" << endl;
-        strcpy(packets[count], *payload);
+        strcpy(packets[count], payload);
         if (file.eof()) break;
         cout << packets[count] << endl;
         count++;
