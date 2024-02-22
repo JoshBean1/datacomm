@@ -72,7 +72,8 @@ int main(int argc, char *argv[])
         recvfrom(main_socket, ack, 512, 0, (struct sockaddr *)&server, &slen);
         cout << "ack:" << ack << endl;
     }
-    payload = "DONE"
+
+    payload[]= "DONE"
     if (sendto(main_socket, payload, 32, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;
     //payload = EOF;
     //if (sendto(main_socket, payload, 4, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;
