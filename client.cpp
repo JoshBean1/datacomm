@@ -22,10 +22,10 @@ int main(int argc, char *argv[])
         exit(-1);
     }
 
-    char server_addr = argv[1];
-    char n_port = argv[2];
+    char* server_addr = argv[1];
+    char* n_port = argv[2];
     int port = atoi(n_port);
-    char filename = argv[3];
+    char* filename = argv[3];
 
     struct hostent *s; 
     s = gethostbyname(server_addr);
@@ -64,8 +64,8 @@ int main(int argc, char *argv[])
         file.read(payload, sizeof(payload));
         if (sendto(main_socket, payload, 4, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;
     }
-    payload = EOF;
-    if (sendto(main_socket, payload, 4, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;
+    //payload = EOF;
+    //if (sendto(main_socket, payload, 4, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;
     
     char ack[512] = "";
     recvfrom(main_socket, ack, 512, 0, (struct sockaddr *)&server, &slen);
