@@ -74,7 +74,7 @@ int main(int argc, char* argv[])
         count++;
         for (int i = 0; i < sizeof(file_chunk); i++)
         {
-            file_chunk.at(i) = toupper(file_chunk.at(i));
+            file_chunk[i] = toupper(file_chunk[i]);
         }
         if (sendto(main_socket, file_chunk, 32, 0, (struct sockaddr *)&client, clen)==-1) cout << "Error in sendto function." << endl;
     }
