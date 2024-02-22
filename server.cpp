@@ -57,16 +57,17 @@ int main(int argc, char* argv[])
 
     int main_socket = 0;
     server.sin_port = htons(r_port);
-    if (bind(main_socket, (struct sockaddr *)&server, sizeof(server)) == -1) cout << "Error in binding for handshake." << endl;
+    if (bind(main_socket, (struct sockaddr *)&server, sizeof(server)) == -1) cout << "Error in binding for main socket." << endl;
 
     ofstream upload ("upload.txt");
     char file_chunk[] = "";
-    
-    while (!upload.eof())
+    int count = 0;
+    while (count < 10)
     {
         if (recvfrom(main_socket, file_chunk, 32, 0, (struct sockaddr *)&client, &clen)==-1);
         upload << file_chunk;
         cout << file_chunk;
+        count++;
     }
     upload.close();
     close(main_socket);
