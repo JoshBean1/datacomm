@@ -70,11 +70,11 @@ int main(int argc, char *argv[])
     char packets[10000][5];
 
     int count = 0;
-    while(true)
+    while(!file.eof())
     {
         file.read(payload, sizeof(payload)-1);
         strcpy(packets[count], payload);
-        if (file.eof()) break;
+        //if (file.eof()) break;
         cout << packets[count] << endl;
         count++;
     }
