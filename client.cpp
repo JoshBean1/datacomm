@@ -65,10 +65,10 @@ int main(int argc, char *argv[])
     char payload[5] = "";
     char ack[512] = "";
 
-    vector<char*> packets;
+    vector<char> packets;
     while(true)
     {
-        file.read(payload, sizeof(payload)-1);
+        file.read(*payload, sizeof(payload)-1);
         if (file.eof()) break;
         cout << payload << endl;
         packets.push_back(payload);
