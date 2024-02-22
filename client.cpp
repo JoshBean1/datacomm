@@ -74,8 +74,9 @@ int main(int argc, char *argv[])
     {
         file.read(payload, sizeof(payload)-1);
         strncpy(packets[count], payload, sizeof(packets[count])-1);
-        if (file.eof()) break;
-        //cout << packets[count] << endl;
+        std::streamsize bytes_read = file.gcount(); // Get the number of bytes read
+        if (bytes_read <= 0) break; // Break if no bytes were read
+        payload[bytes_read] = '\0';
         count++;
         packets[count][sizeof(packets[count])-1] = '\0';
     }
