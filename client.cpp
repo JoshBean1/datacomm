@@ -73,12 +73,13 @@ int main(int argc, char *argv[])
     while(true)
     {
         file.read(payload, sizeof(payload)-1);
+        cout << "Test" << endl;
         strcpy(packets[count], payload);
         if (file.eof()) break;
         cout << packets[count] << endl;
         count++;
     }
-    cout << "Test" << endl;
+    
     // convert number of packets to c string to send to server
     int packet_count = sizeof(packets) / sizeof(packets[0]);
     string packet_count_str = to_string(packet_count);
