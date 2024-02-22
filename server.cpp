@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
 
     int r_port = rand() % 64512 + 1024;
 
-    payload = to_string(r_port);
+    payload = (to_string(r_port)).c_str();
 
     if (sendto(handshake_socket, payload, 64, 0, (struct sockaddr *)&client, clen)==-1) cout << "Error in sendto function."; << endl;
   
