@@ -64,16 +64,30 @@ int main(int argc, char *argv[])
     char payload[5] = "";
     char ack[512] = "";
 
+    vector<char*> packets;
     while(true)
     {
         file.read(payload, sizeof(payload)-1);
         if (file.eof()) break;
+        packets.push_back(payload);
+    }
+
+    // convert number of packets to c string to send to server
+    int packet_count = packets.size();
+    string packet_count_str = to_string(packet_count);
+    const char * send_packet_count = packet_count_str.c_str();
+
+    if (sendto(main_socket, send_packet_count, 32, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for packet count." << endl;
+    recvfrom(main_socket, ack, 512, 0, (struct sockaddr *)&server, &slen);  // received number
+
+    for (auto packet: packets)
+    {
         cout << "payload:" << payload << endl;
         if (sendto(main_socket, payload, 32, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;
         recvfrom(main_socket, ack, 512, 0, (struct sockaddr *)&server, &slen);
         cout << "ack:" << ack << endl;
-        
     }
+    
 
     char payload_end[] = "DONE";
     if (sendto(main_socket, payload_end, 32, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;

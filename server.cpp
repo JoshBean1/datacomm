@@ -65,12 +65,18 @@ int main(int argc, char* argv[])
     if (bind(main_socket, (struct sockaddr *)&server, sizeof(server)) == -1) cout << "Error in binding for main socket." << endl;
 
     ofstream upload ("upload.txt");
+    char packet_count[512];
+    int packets;
     char file_chunk[512];
-    
-    while (true)
+
+    if (recvfrom(main_socket, packet_count, 512, 0, (struct sockaddr *)&client, &clen)==-1) cout << "fail to receive from client" << endl;
+    packets = atoi(packet_count);
+    if (sendto(main_socket, packet_count, 512, 0, (struct sockaddr *)&client, clen)==-1) cout << "Error in sendto function for packet count ack." << endl;
+
+    for (int i = 0; i < packets; i++)
     {
         if (recvfrom(main_socket, file_chunk, 512, 0, (struct sockaddr *)&client, &clen)==-1) cout << "fail to receive from client" << endl;
-        if (strcmp(file_chunk, "DONE") == 0) break;
+        
         upload << file_chunk;
         cout << "received:" << file_chunk << endl;
 
