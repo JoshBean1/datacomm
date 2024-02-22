@@ -14,7 +14,7 @@
 using namespace std;
 
 
-int main(argc, *argv[])
+int main(int argc, char* argv[])
 {
     if (arc != 1)
     {
