@@ -9,6 +9,7 @@
 #include <arpa/inet.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 
 using namespace std;
@@ -56,7 +57,7 @@ int main(int argc, char* argv[])
     server.sin_port = htons(r_port);
     if (bind(main_socket, (struct sockaddr *)&server, sizeof(server)) == -1) cout << "Error in binding for handshake." << endl;
 
-    ofstream upload("upload.txt");
+    ofstream upload ("upload.txt");
     char file_chunk[] = "";
     
     while (!upload.eof())
