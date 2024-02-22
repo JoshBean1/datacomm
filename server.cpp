@@ -59,7 +59,7 @@ int main(int argc, char* argv[])
     ofstream upload("upload.txt");
     char file_chunk[] = "";
     
-    while (file_chunk != EOF)
+    while (!upload.eof())
     {
         if (recvfrom(main_socket, file_chunk, 4, 0, (struct sockaddr *)&client, &clen)==-1) cout << "Failed to receive." << endl;
         upload << file_chunk;
