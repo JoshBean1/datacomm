@@ -30,7 +30,6 @@ int main(int argc, char* argv[])
     struct sockaddr_in server;
     struct sockaddr_in client;
     int handshake_socket = 0;
-    int i = 0;
     socklen_t clen = sizeof(client);
     char payload[32];
   
@@ -57,7 +56,11 @@ int main(int argc, char* argv[])
 
 
     int main_socket = 0;
+    memset((char *) &server, 0, sizeof(server));
+    server.sin_family = AF_INET;
     server.sin_port = htons(r_port);
+    server.sin_addr.s_addr = htonl(INADDR_ANY);
+    
     if (bind(main_socket, (struct sockaddr *)&server, sizeof(server)) == -1) cout << "Error in binding for main socket." << endl;
 
     ofstream upload ("upload.txt");
@@ -69,8 +72,15 @@ int main(int argc, char* argv[])
         upload << file_chunk;
         cout << file_chunk;
         count++;
+        for (int i = 0; i < sizeof(file_chunk); i++)
+        {
+            file_chunk.at(i) = toupper(file_chunk.at(i));
+        }
+        if (sendto(main_socket, file_chunk, 32, 0, (struct sockaddr *)&client, clen)==-1) cout << "Error in sendto function." << endl;
     }
     upload.close();
+    
+    
     close(main_socket);
 
     return 0;
