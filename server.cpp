@@ -66,15 +66,13 @@ int main(int argc, char* argv[])
 
     ofstream upload ("upload.txt");
     char file_chunk[512];
-    int count = 0;
     
-    while (count < 3)
+    while (!upload.eof())
     {
         cout << "testing socket" << endl;
         if (recvfrom(main_socket, file_chunk, 32, 0, (struct sockaddr *)&client, &clen)==-1) cout << "fail to receive from client" << endl;
         upload << file_chunk;
         cout << file_chunk;
-        count++;
         for (int i = 0; i < sizeof(file_chunk); i++)
         {
             file_chunk[i] = toupper(file_chunk[i]);
