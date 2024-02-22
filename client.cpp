@@ -10,6 +10,7 @@
 #include <arpa/inet.h>   // if you want to use inet_addr() function
 #include <string.h>
 #include <unistd.h>
+#include <vector>
 
 using namespace std;
 
