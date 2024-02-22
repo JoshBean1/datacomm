@@ -79,9 +79,9 @@ int main(int argc, char *argv[])
     const char * send_packet_count = packet_count_str.c_str();
 
     if (sendto(main_socket, send_packet_count, 32, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for packet count." << endl;
-    recvfrom(main_socket, ack, 512, 0, (struct sockaddr *)&server, &slen);  // received number
+    recvfrom(main_socket, ack, 512, 0, (struct sockaddr *)&server, &slen);  // ack received number
 
-    for (auto packet: packets)
+    for (auto& packet: packets)
     {
         cout << "payload:" << packet << endl;
         if (sendto(main_socket, packet, 32, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;
@@ -89,13 +89,6 @@ int main(int argc, char *argv[])
         cout << "ack:" << ack << endl;
     }
     
-
-    char payload_end[] = "DONE";
-    if (sendto(main_socket, payload_end, 32, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;
-    //payload = EOF;
-    //if (sendto(main_socket, payload, 4, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;
-
-    //cout << ack << endl;
     close(main_socket);
 
     return 0;
