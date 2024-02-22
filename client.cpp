@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
 
     char payload[3] = "";
     char ack[512] = "";
-    count = 0;
+    int count = 0;
     while(count < 3)
     {
         file.read(payload, sizeof(payload));
