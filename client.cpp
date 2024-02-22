@@ -64,17 +64,15 @@ int main(int argc, char *argv[])
     ifstream file;
     file.open(filename);
 
-    char payload[5] = "";
     char ack[512] = "";
 
     char packets[10000][5];
 
     int count = 0;
-    cout << sizeof(payload)-1<<endl;
+    
     while(true)
     {
-        file.read(packets[count], sizeof(payload)-1);
-        
+        file.read(packets[count], 4);
         if (file.eof()) break;
         count++;
     }
