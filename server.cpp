@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
     const char * port_payload = port.c_str();
     
     if (recvfrom(handshake_socket, payload, 32, 0, (struct sockaddr *)&client, &clen)==-1) cout << "Failed to receive handshake." << endl; 
-    //cout << "Received data: " << payload << endl;
+    cout << "Received data: " << payload << endl;
 
 
     if (sendto(handshake_socket, port_payload, 64, 0, (struct sockaddr *)&client, clen)==-1) cout << "Error in sendto function." << endl;
