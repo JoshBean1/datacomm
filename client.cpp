@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
         cout << payload << endl;
         packets.push_back(payload);
     }
-
+    cout << "TEST: " << packets.at(1) << endl;
     // convert number of packets to c string to send to server
     int packet_count = packets.size();
     string packet_count_str = to_string(packet_count);
