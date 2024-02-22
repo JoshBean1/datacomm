@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
     recvfrom(handshake_socket, handshake, 32, 0, (struct sockaddr *)&server, &slen);
 
     int r_port = atoi(handshake);
-    cout << r_port << endl;
+    cout << endl;
     close(handshake_socket);
 
     int main_socket = 0;
