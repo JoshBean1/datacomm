@@ -71,7 +71,7 @@ int main(int argc, char* argv[])
     {
         if (recvfrom(main_socket, file_chunk, 512, 0, (struct sockaddr *)&client, &clen)==-1) cout << "fail to receive from client" << endl;
         upload << file_chunk;
-        cout << "received: " << file_chunk << endl;
+        cout << "received:" << file_chunk << endl;
 
         for (int i = 0; i < sizeof(file_chunk); i++)
         {
