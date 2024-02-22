@@ -67,9 +67,10 @@ int main(int argc, char* argv[])
     ofstream upload ("upload.txt");
     char file_chunk[] = "";
     int count = 0;
-    cout << "made socket" << endl;
+    
     while (count < 3)
     {
+        cout << "testing socket" << endl;
         if (recvfrom(main_socket, file_chunk, 32, 0, (struct sockaddr *)&client, &clen)==-1);
         upload << file_chunk;
         cout << file_chunk;
