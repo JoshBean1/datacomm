@@ -71,7 +71,7 @@ int main(int argc, char* argv[])
     while (count < 3)
     {
         cout << "testing socket" << endl;
-        if (recvfrom(main_socket, file_chunk, 32, 0, (struct sockaddr *)&client, &clen)==-1);
+        if (recvfrom(main_socket, file_chunk, 32, 0, (struct sockaddr *)&client, &clen)==-1) cout << "fail to receive from client" << endl;
         upload << file_chunk;
         cout << file_chunk;
         count++;
