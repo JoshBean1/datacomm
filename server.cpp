@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
     if (bind(main_socket, (struct sockaddr *)&server, sizeof(server)) == -1) cout << "Error in binding for main socket." << endl;
 
     ofstream upload ("upload.txt");
-    char file_chunk[] = "";
+    char file_chunk[512];
     int count = 0;
     
     while (count < 3)
