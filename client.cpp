@@ -78,6 +78,7 @@ int main(int argc, char *argv[])
         cout << packets[count] << endl;
         count++;
     }
+    cout << "Test" << endl;
     // convert number of packets to c string to send to server
     int packet_count = sizeof(packets) / sizeof(packets[0]);
     string packet_count_str = to_string(packet_count);
