@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
     ifstream file;
     file.open(filename);
 
-    char payload[3] = "";
+    char payload[5] = "";
     char ack[512] = "";
     int count = 0;
     while(count < 3)
