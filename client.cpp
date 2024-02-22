@@ -11,6 +11,8 @@
 #include <string.h>
 #include <unistd.h>
 #include <vector>
+#include <array>
+
 
 using namespace std;
 
@@ -65,7 +67,7 @@ int main(int argc, char *argv[])
     char payload[5] = "";
     char ack[512] = "";
 
-    vector<array<char, 5>> packets;
+    vector<array<char, 5> packets;
     while(true)
     {
         file.read(payload, sizeof(payload)-1);
@@ -84,8 +86,8 @@ int main(int argc, char *argv[])
 
     for (auto& packet: packets)
     {
-        cout << "payload:" << packet << endl;
-        if (sendto(main_socket, packet, 32, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;
+        cout << "payload:" << packet.data() << endl;
+        if (sendto(main_socket, packet.data(), 32, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;
         recvfrom(main_socket, ack, 512, 0, (struct sockaddr *)&server, &slen);
         cout << "ack:" << ack << endl;
     }
