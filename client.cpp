@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
     if ((main_socket=socket(AF_INET, SOCK_DGRAM, 0))==-1) cout << "Error creating new socket." << endl;
     
     server.sin_port = htons(r_port);
-    //bcopy((char *)s->h_addr, (char *)&server.sin_addr.s_addr, s->h_length);  // test this
+    bcopy((char *)s->h_addr, (char *)&server.sin_addr.s_addr, s->h_length);  // test this
 
     ifstream file;
     file.open(filename);
