@@ -10,6 +10,8 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <fstream>
+#include <stdio.h>
 
 
 using namespace std;
