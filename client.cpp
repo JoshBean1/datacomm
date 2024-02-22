@@ -88,8 +88,8 @@ int main(int argc, char *argv[])
 
     for (int i = 0; i < count; ++i)
     {
-        cout << "payload:" << packet.data() << endl;
-        if (sendto(main_socket, packet.data(), 32, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;
+        cout << "payload:" << packets[i] << endl;
+        if (sendto(main_socket, packets[i], 32, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;
         recvfrom(main_socket, ack, 512, 0, (struct sockaddr *)&server, &slen);
         cout << "ack:" << ack << endl;
     }
