@@ -69,19 +69,19 @@ int main(int argc, char* argv[])
     
     while (!upload.eof())
     {
-        cout << "testing socket" << endl;
-        if (recvfrom(main_socket, file_chunk, 32, 0, (struct sockaddr *)&client, &clen)==-1) cout << "fail to receive from client" << endl;
+        if (recvfrom(main_socket, file_chunk, 512, 0, (struct sockaddr *)&client, &clen)==-1) cout << "fail to receive from client" << endl;
         upload << file_chunk;
-        cout << file_chunk;
+        cout << "received: " << file_chunk << endl;
+
         for (int i = 0; i < sizeof(file_chunk); i++)
         {
             file_chunk[i] = toupper(file_chunk[i]);
         }
+
         if (sendto(main_socket, file_chunk, 512, 0, (struct sockaddr *)&client, clen)==-1) cout << "Error in sendto function for ack." << endl;
     }
+
     upload.close();
-    
-    
     close(main_socket);
 
     return 0;
