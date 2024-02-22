@@ -45,10 +45,9 @@ int main(int argc, char* argv[])
     int r_port = rand() % 64512 + 1024;
     string port = to_string(r_port);
     const char * port_payload = port.c_str();
+    cout << "My random port is: " << r_port << endl;
     
-    if (recvfrom(handshake_socket, payload, 32, 0, (struct sockaddr *)&client, &clen)==-1) cout << "Failed to receive handshake." << endl; 
-    cout << "Received data: " << payload << endl;
-
+    if (recvfrom(handshake_socket, payload, 32, 0, (struct sockaddr *)&client, &clen)==-1) cout << "Failed to receive handshake." << endl;
 
     if (sendto(handshake_socket, port_payload, 64, 0, (struct sockaddr *)&client, clen)==-1) cout << "Error in sendto function." << endl;
   

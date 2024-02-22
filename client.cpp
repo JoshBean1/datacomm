@@ -79,21 +79,17 @@ int main(int argc, char *argv[])
     
     // convert number of packets to c string to send to server
     int packet_count = count;
-    cout << "Last:" << packets[count] << endl;
-    cout << "second to last:" << packets[count-1] << endl;
     string packet_count_str = to_string(packet_count);
     const char * send_packet_count = packet_count_str.c_str();
-    cout << "packet count:" << packet_count << endl;
 
     if (sendto(main_socket, send_packet_count, 32, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for packet count." << endl;
     recvfrom(main_socket, ack, 512, 0, (struct sockaddr *)&server, &slen);  // ack received number
 
     for (int i = 0; i <= count; ++i)
     {
-        cout << "payload:" << packets[i] << endl;
         if (sendto(main_socket, packets[i], 32, 0, (struct sockaddr *)&server, slen)==-1) cout << "Error in sendto function for file." << endl;
         recvfrom(main_socket, ack, 512, 0, (struct sockaddr *)&server, &slen);
-        cout << "ack:" << ack << endl;
+        cout << ack << endl;
     }
     
     close(main_socket);
