@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
     ofstream upload ("upload.txt");
     char packet_count[512];
     int packets;
-    char file_chunk[5];
+    char file_chunk[4];
     // receive packet count
     if (recvfrom(main_socket, packet_count, 32, 0, (struct sockaddr *)&client, &clen)==-1) cout << "Fail to receive packet count from client" << endl;
     packets = atoi(packet_count);
