@@ -1,13 +1,13 @@
 // Joshua Bean, jab1896
 // Much of the socket code for both my client and server is based on the example code.
 #include <iostream>
-#include <sys/types.h>   // defines types (like size_t)
-#include <sys/socket.h>  // defines socket class
-#include <netinet/in.h>  // defines port numbers for (internet) sockets, some address structures, and constants
+#include <sys/types.h> 
+#include <sys/socket.h>
+#include <netinet/in.h>
 #include <netdb.h> 
 #include <iostream>
 #include <fstream>
-#include <arpa/inet.h>   // if you want to use inet_addr() function
+#include <arpa/inet.h>
 #include <string.h>
 #include <unistd.h>
 #include <vector>

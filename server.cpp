@@ -1,11 +1,11 @@
 // Joshua Bean, jab1896
 
 #include <iostream>
-#include <sys/types.h>   // defines types (like size_t)
-#include <sys/socket.h>  // defines socket class
-#include <netinet/in.h>  // defines port numbers for (internet) sockets, some address structures, and constants
-#include <time.h>        // used for random number generation
-#include <string.h> // using this to convert random port integer to string
+#include <sys/types.h>   
+#include <sys/socket.h> 
+#include <netinet/in.h>  
+#include <time.h>
+#include <string.h>
 #include <arpa/inet.h>
 #include <stdio.h>
 #include <unistd.h>
